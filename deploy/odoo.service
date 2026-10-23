@@ -1,0 +1,20 @@
+[Unit]
+Description=Odoo 19
+After=network.target postgresql.service openbao-agent.service
+Wants=openbao-agent.service
+
+[Service]
+Type=simple
+User=odoo
+Group=odoo
+# Variables entregadas por el agente de OpenBao (GEMINI_API_KEY). Systemd lo lee como root.
+EnvironmentFile=/run/odoo-env/env
+# Espera a que el agente haya escrito el archivo (hasta 30 s)
+ExecStartPre=/bin/sh -c 'for i in $(seq 1 30); do [ -s /run/odoo-env/env ] && exit 0; sleep 1; done; echo "No llego GEMINI_API_KEY" >&2; exit 1'
+ExecStart=/opt/odoo/venv/bin/python /opt/odoo/odoo/odoo-bin -c /etc/odoo/odoo.conf
+Restart=on-failure
+RestartSec=5
+KillMode=mixed
+
+[Install]
+WantedBy=multi-user.target

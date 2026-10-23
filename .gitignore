@@ -1,0 +1,22 @@
+# Secretos (las plantillas *.example sí se versionan)
+.env
+*.env
+!.env.example
+odoo.conf
+secret_id
+role_id
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Logs y pruebas
+*.log
+test_run.log
+
+# Editor / sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

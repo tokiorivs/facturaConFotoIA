@@ -1,0 +1,17 @@
+[Unit]
+Description=OpenBao Agent (entrega GEMINI_API_KEY a Odoo)
+After=network.target openbao.service
+Wants=openbao.service
+
+[Service]
+Type=simple
+User=root
+RuntimeDirectory=odoo-env
+RuntimeDirectoryMode=0700
+RuntimeDirectoryPreserve=yes
+ExecStart=/usr/bin/bao agent -config=/etc/openbao/agent.hcl
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

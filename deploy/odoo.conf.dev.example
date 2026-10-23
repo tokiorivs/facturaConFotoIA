@@ -1,0 +1,8 @@
+[options]
+admin_passwd = CAMBIAR_POR_UNA_CLAVE_FUERTE
+db_host = localhost
+db_port = 5432
+db_user = CAMBIAR
+db_password = CAMBIAR
+addons_path = /ruta/a/odoo/addons,/ruta/a/custom_addons
+http_port = 8069
